@@ -27,8 +27,8 @@ class MatrixCell
         return [
             'rowIndex' => $this->rowIndex,
             'colIndex' => $this->colIndex,
-            'isReadonly' => $this->isReadonly,
-            'isDisabled' => $this->isDisabled
+            'isReadonly' => $this->isReadonly === true,
+            'isDisabled' => $this->isDisabled === true
         ];
     }
 }

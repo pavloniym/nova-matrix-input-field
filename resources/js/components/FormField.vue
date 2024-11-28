@@ -10,7 +10,7 @@
                 <template v-slot:default="{ cell, row, valueKey }">
                     <input
                         type="text"
-                        class="w-full form-control form-input form-control-bordered"
+                        class="px-0 w-full form-control form-input form-control-bordered"
                         :value="value?.[valueKey]"
                         :style="{ textAlign: row?.valueAlign || 'left' }"
                         :readonly="cell?.isReadonly === true"
