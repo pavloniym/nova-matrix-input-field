@@ -81,8 +81,8 @@
     const getKey = (rowIndex, colIndex) => {
         let values = []
 
-        if (implodeType === IMPLODE_ROW_COLUMN) values = [prefix?.value, rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value]
-        if (implodeType === IMPLODE_COLUMN_ROW) values = [prefix?.value, columns?.value?.[colIndex]?.value, rows?.value?.[rowIndex]?.value]
+        if (implodeType.value === IMPLODE_ROW_COLUMN) values = [prefix?.value, rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value]
+        if (implodeType.value === IMPLODE_COLUMN_ROW) values = [prefix?.value, columns?.value?.[colIndex]?.value, rows?.value?.[rowIndex]?.value]
 
         return values
             .filter(v => v !== undefined && v !== null)
