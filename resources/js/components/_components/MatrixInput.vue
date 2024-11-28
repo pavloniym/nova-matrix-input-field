@@ -13,17 +13,20 @@
         <tbody>
         <tr v-for="(row, rowIndex) in rows" :key="rowIndex">
             <td class="whitespace-nowrap text-right pr-2">{{ row.label }}</td>
-            <td v-for="(column, colIndex) in columns" :key="colIndex" :style="{width: column?.cellWidth || '80px'}">
+            <td v-for="(column, colIndex) in columns"
+                :key="colIndex"
+                :value="getKey(rowIndex, colIndex)"
+                :style="{width: column?.cellWidth || '80px'}">
                 <slot v-bind="{
-                    row,
-                    column,
-                    rowIndex,
-                    colIndex,
-                    cell: getCell(rowIndex, colIndex),
-                    valueKey: getKey(rowIndex, colIndex),
-                    displayValue: decodedDisplayValues?.[getKey(rowIndex, colIndex)],
-                }"
-                ></slot>
+                        row,
+                        column,
+                        rowIndex,
+                        colIndex,
+                        cell: getCell(rowIndex, colIndex),
+                        valueKey: getKey(rowIndex, colIndex),
+                        displayValue: decodedDisplayValues?.[getKey(rowIndex, colIndex)],
+                    }">
+                </slot>
             </td>
         </tr>
         </tbody>
