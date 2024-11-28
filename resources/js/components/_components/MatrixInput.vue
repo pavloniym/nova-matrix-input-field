@@ -80,10 +80,11 @@
             width: column?.cellWidth || 'auto',
             maxWidth: column?.cellWidth || 'auto',
             minWidth: column?.cellWidth || 'auto',
+            textAlign: column.headerAlign || 'center',
         }
 
         if(column?.rotateHeaderInDegrees) {
-            return {
+            styles = {
                 ...styles,
                 transform: `rotate(${column?.rotateHeaderInDegrees}deg)`,
                 whiteSpace: 'nowrap',
@@ -93,7 +94,7 @@
 
         return {
             ...styles,
-            textAlign: column.headerAlign || 'center'
+            ...(column?.theadStyles || [])
         }
     }
 

@@ -9,6 +9,7 @@ class MatrixColumn
         public string $label,
         public string $value,
         public string $cellWidth = '80px',
+        public array  $theadStyles = [],
         public string $headerAlign = 'center',
         public int    $rotateHeaderInDegrees = 0,
     )
@@ -27,6 +28,7 @@ class MatrixColumn
             'label' => $this->label,
             'value' => $this->value,
             'cellWidth' => $this->cellWidth,
+            'theadStyles' => $this->theadStyles,
             'headerAlign' => $this->headerAlign,
             'rotateHeaderInDegrees' => $this->rotateHeaderInDegrees
         ];
