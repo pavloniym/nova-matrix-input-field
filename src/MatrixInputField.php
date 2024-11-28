@@ -9,6 +9,10 @@ use Pavloniym\NovaMatrixInputField\Components\MatrixRow;
 
 class MatrixInputField extends Field
 {
+    const IMPLODE_ROW_COLUMN = 'IMPLODE_ROW_COLUMN';
+    const IMPLODE_COLUMN_ROW = 'IMPLODE_COLUMN_ROW';
+
+
     /**
      * The field's component.
      *
@@ -56,6 +60,17 @@ class MatrixInputField extends Field
         return $this->withMeta(['tableStyles' => $styles]);
     }
 
+
+    /**
+     * Set implode type
+     *
+     * @param string $type
+     * @return self
+     */
+    public function setImplodeType(string $type): self
+    {
+        return $this->withMeta(['implodeType' => $type]);
+    }
 
     /**
      * Set matrix cells

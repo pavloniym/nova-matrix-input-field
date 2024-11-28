@@ -35,6 +35,10 @@
     // Composables
     import {computed} from 'vue'
 
+    // Constants
+    const IMPLODE_ROW_COLUMN = 'IMPLODE_ROW_COLUMN';
+    const IMPLODE_COLUMN_ROW = 'IMPLODE_COLUMN_ROW';
+
     // Props
     const props = defineProps({
         field: {type: Object, required: true},
@@ -50,6 +54,7 @@
     // Get delimiter
     const prefix = computed(() => props?.field?.prefix || null)
     const delimiter = computed(() => props?.field?.delimiter || ':')
+    const implodeType = computed(() => props?.field?.implodeType || IMPLODE_ROW_COLUMN)
 
     // Computed
     // Get table styles
@@ -73,7 +78,20 @@
     // Methods
     // Get key
     // Get cell of provided row and col indexes
-    const getKey = (rowIndex, colIndex) => [prefix?.value, rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value].filter(v => v).join(delimiter.value)
+    const getKey = (rowIndex, colIndex) => {
+        let values = []
+
+        if (implodeType === IMPLODE_ROW_COLUMN) values = [prefix?.value, rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value]
+        if (implodeType === IMPLODE_COLUMN_ROW) values = [prefix?.value, columns?.value?.[colIndex]?.value, rows?.value?.[rowIndex]?.value]
+
+        return values
+            .filter(v => v !== undefined && v !== null)
+            .join(delimiter.value)
+
+    }
+
+    // Methods
+    // Get cell by row and col indexes
     const getCell = (rowIndex, collIndex) => (cells?.value || []).find(cell => cell.rowIndex === rowIndex && cell.colIndex === collIndex) || null
 
 
@@ -88,7 +106,7 @@
             textAlign: column.headerAlign || 'center',
         }
 
-        if(column?.rotateHeaderInDegrees || column?.translateHeaderByXYInPixels) {
+        if (column?.rotateHeaderInDegrees || column?.translateHeaderByXYInPixels) {
             styles = {
                 ...styles,
                 transform: `rotate(${column?.rotateHeaderInDegrees}) translate(${column.translateHeaderByXYInPixels?.[0] || '0px'}, ${column.translateHeaderByXYInPixels?.[1] || '0px'})`,
@@ -102,7 +120,6 @@
             ...(column?.theadStyles || [])
         }
     }
-
 
 
 </script>
