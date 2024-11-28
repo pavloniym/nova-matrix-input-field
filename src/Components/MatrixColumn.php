@@ -11,7 +11,8 @@ class MatrixColumn
         public string $cellWidth = '80px',
         public array  $theadStyles = [],
         public string $headerAlign = 'center',
-        public int    $rotateHeaderInDegrees = 0,
+        public ?string $rotateHeaderInDegrees = null,
+        public ?array  $translateHeaderByXYInPixels = null,
     )
     {
         //
@@ -30,7 +31,8 @@ class MatrixColumn
             'cellWidth' => $this->cellWidth,
             'theadStyles' => $this->theadStyles,
             'headerAlign' => $this->headerAlign,
-            'rotateHeaderInDegrees' => $this->rotateHeaderInDegrees
+            'rotateHeaderInDegrees' => $this->rotateHeaderInDegrees,
+            'translateHeaderByXYInPixels' => $this->translateHeaderByXYInPixels
         ];
     }
 }

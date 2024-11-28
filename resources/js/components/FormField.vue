@@ -14,6 +14,7 @@
                         :value="value?.[valueKey]"
                         :style="{ textAlign: row?.valueAlign || 'left' }"
                         :readonly="cell?.isReadonly === true"
+                        :disabled="cell?.isDisabled === true"
                         @input="value[valueKey] = $event.target.value"
                     />
                 </template>

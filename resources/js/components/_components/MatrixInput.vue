@@ -83,10 +83,10 @@
             textAlign: column.headerAlign || 'center',
         }
 
-        if(column?.rotateHeaderInDegrees) {
+        if(column?.rotateHeaderInDegrees || column?.translateHeaderByXYInPixels) {
             styles = {
                 ...styles,
-                transform: `rotate(${column?.rotateHeaderInDegrees}deg)`,
+                transform: `rotate(${column?.rotateHeaderInDegrees}) translate(${column.translateHeaderByXYInPixels?.[0] || '0px'}, ${column.translateHeaderByXYInPixels?.[1] || '0px'})`,
                 whiteSpace: 'nowrap',
                 transformOrigin: 'center center',
             }
