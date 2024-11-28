@@ -36,6 +36,16 @@ class MatrixInputField extends Field
 
 
     /**
+     * @param string|int $prefix
+     * @return $this
+     */
+    public function setPrefix(string|int $prefix): self
+    {
+        return $this->withMeta(['prefix' => $prefix]);
+    }
+
+
+    /**
      * Set table styles
      *
      * @param array $styles

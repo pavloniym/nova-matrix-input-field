@@ -44,6 +44,11 @@
     const rows = computed(() => props?.field?.rows || [])
     const cells = computed(() => props?.field?.cells || [])
     const columns = computed(() => props?.field?.columns || [])
+
+    // Computed
+    // Get prefix
+    // Get delimiter
+    const prefix = computed(() => props?.field?.prefix || null)
     const delimiter = computed(() => props?.field?.delimiter || ':')
 
     // Computed
@@ -68,7 +73,7 @@
     // Methods
     // Get key
     // Get cell of provided row and col indexes
-    const getKey = (rowIndex, colIndex) => [rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value].join(delimiter.value)
+    const getKey = (rowIndex, colIndex) => [prefix?.value, rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value].filter(v => v).join(delimiter.value)
     const getCell = (rowIndex, collIndex) => (cells?.value || []).find(cell => cell.rowIndex === rowIndex && cell.colIndex === collIndex) || null
 
 
