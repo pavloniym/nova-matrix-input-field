@@ -3,6 +3,7 @@
 namespace Pavloniym\NovaMatrixInputField;
 
 use Laravel\Nova\Fields\Field;
+use Pavloniym\NovaMatrixInputField\Components\MatrixCell;
 use Pavloniym\NovaMatrixInputField\Components\MatrixColumn;
 use Pavloniym\NovaMatrixInputField\Components\MatrixRow;
 
@@ -32,6 +33,24 @@ class MatrixInputField extends Field
     {
         return $this->withMeta(['delimiter' => $delimiter]);
     }
+
+    /**
+     * Set matrix cells
+     *
+     * @param iterable $matrixCells
+     * @return self
+     */
+    public function setMatrixCells(iterable $matrixCells = []): self
+    {
+        return $this->withMeta([
+            'cells' => collect($matrixCells)
+                ->filter(fn(mixed $matrixCell) => $matrixCell instanceof MatrixCell)
+                ->map(fn(MatrixCell $matrixCell) => $matrixCell->toArray())
+                ->values()
+                ->toArray()
+        ]);
+    }
+
 
     /**
      * Set matrix rows

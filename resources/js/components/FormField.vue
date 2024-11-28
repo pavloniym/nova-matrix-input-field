@@ -7,12 +7,13 @@
     >
         <template #field>
             <matrix-input v-bind="{field}" :id="field.attribute">
-                <template v-slot:default="{ row, valueKey }">
+                <template v-slot:default="{ cell, row, valueKey }">
                     <input
                         type="text"
                         class="w-full form-control form-input form-control-bordered"
                         :value="value?.[valueKey]"
                         :style="{ textAlign: row?.valueAlign || 'left' }"
+                        :readonly="cell?.isReadonly === true"
                         @input="value[valueKey] = $event.target.value"
                     />
                 </template>

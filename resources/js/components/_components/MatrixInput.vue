@@ -17,6 +17,7 @@
                     column,
                     rowIndex,
                     colIndex,
+                    cell: getCell(rowIndex, colIndex),
                     valueKey: getKey(rowIndex, colIndex),
                     displayValue: decodedDisplayValues?.[getKey(rowIndex, colIndex)],
                 }"
@@ -38,15 +39,16 @@
     })
 
     // Computed
-    const rows = computed(() => props.field.rows || [])
-    const columns = computed(() => props.field.columns || [])
-    const delimiter = computed(() => props.field.delimiter || ':')
+    const rows = computed(() => props?.field?.rows || [])
+    const cells = computed(() => props?.field?.cells || [])
+    const columns = computed(() => props?.field?.columns || [])
+    const delimiter = computed(() => props?.field?.delimiter || ':')
 
     // Computed
     // Get decoded value
     const decodedDisplayValues = computed(() => {
         try {
-            const rawValue = props?.field.value || props?.field.displayedAs;
+            const rawValue = props?.field?.value || props?.field?.displayedAs;
             if (typeof rawValue === 'object' && rawValue !== null && !Array.isArray(rawValue)) {
                 return rawValue
             }
@@ -60,5 +62,10 @@
     // Methods
     // Get key
     const getKey = (rowIndex, colIndex) => [rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value].join(delimiter.value)
+
+    // Methods
+    // Get cell of provided row and col indexes
+    const getCell = (rowIndex, collIndex) => (cells?.value || []).find(cell => cell.rowIndex === rowIndex && cell.colIndex === collIndex) || null
+
 
 </script>
