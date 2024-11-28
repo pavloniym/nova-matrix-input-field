@@ -9,7 +9,6 @@
                         class="px-0 w-full form-control form-input form-control-bordered"
                         :style="{ textAlign: row?.valueAlign || 'left' }"
                         :value="displayValue"
-                        :readonly="cell?.isReadonly === true"
                         :disabled="cell?.isDisabled === true"
                     />
                 </template>
