@@ -2,13 +2,15 @@
     <PanelItem :index="index" :field="field">
         <template #value>
             <matrix-input v-bind="{field}">
-                <template v-slot:default="{ row, displayValue }">
+                <template v-slot:default="{ cell, row, displayValue }">
                     <input
                         readonly
                         type="text"
                         class="w-full form-control form-input form-control-bordered"
                         :style="{ textAlign: row?.valueAlign || 'left' }"
                         :value="displayValue"
+                        :readonly="cell?.isReadonly === true"
+                        :disabled="cell?.isDisabled === true"
                     />
                 </template>
             </matrix-input>
