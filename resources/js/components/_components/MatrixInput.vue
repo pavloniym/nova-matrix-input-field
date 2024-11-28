@@ -1,9 +1,11 @@
 <template>
-    <table>
+    <table :style="tableStyles">
         <thead>
         <tr>
             <th></th>
-            <th v-for="(column, colIndex) in columns" :key="colIndex" :style="{textAlign: column.headerAlign || 'center'}">
+            <th v-for="(column, colIndex) in columns"
+                :key="colIndex"
+                :style="getHeaderStylesOfColumn(column)">
                 {{ column.label }}
             </th>
         </tr>
@@ -45,6 +47,10 @@
     const delimiter = computed(() => props?.field?.delimiter || ':')
 
     // Computed
+    // Get table styles
+    const tableStyles = computed(() => props?.field?.tableStyles || {})
+
+    // Computed
     // Get decoded value
     const decodedDisplayValues = computed(() => {
         try {
@@ -61,11 +67,36 @@
 
     // Methods
     // Get key
+    // Get cell of provided row and col indexes
     const getKey = (rowIndex, colIndex) => [rows?.value?.[rowIndex]?.value, columns?.value?.[colIndex]?.value].join(delimiter.value)
+    const getCell = (rowIndex, collIndex) => (cells?.value || []).find(cell => cell.rowIndex === rowIndex && cell.colIndex === collIndex) || null
+
 
     // Methods
-    // Get cell of provided row and col indexes
-    const getCell = (rowIndex, collIndex) => (cells?.value || []).find(cell => cell.rowIndex === rowIndex && cell.colIndex === collIndex) || null
+    // Get header styles of column
+    const getHeaderStylesOfColumn = (column) => {
+
+        let styles = {
+            width: column?.cellWidth || 'auto',
+            maxWidth: column?.cellWidth || 'auto',
+            minWidth: column?.cellWidth || 'auto',
+        }
+
+        if(column?.rotateHeaderInDegrees) {
+            return {
+                ...styles,
+                transform: `rotate(${column?.rotateHeaderInDegrees}deg)`,
+                whiteSpace: 'nowrap',
+                transformOrigin: 'center center',
+            }
+        }
+
+        return {
+            ...styles,
+            textAlign: column.headerAlign || 'center'
+        }
+    }
+
 
 
 </script>

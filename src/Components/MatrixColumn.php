@@ -10,6 +10,7 @@ class MatrixColumn
         public string $value,
         public string $cellWidth = '80px',
         public string $headerAlign = 'center',
+        public int    $rotateHeaderInDegrees = 0,
     )
     {
         //
@@ -26,7 +27,8 @@ class MatrixColumn
             'label' => $this->label,
             'value' => $this->value,
             'cellWidth' => $this->cellWidth,
-            'headerAlign' => $this->headerAlign
+            'headerAlign' => $this->headerAlign,
+            'rotateHeaderInDegrees' => $this->rotateHeaderInDegrees
         ];
     }
 }

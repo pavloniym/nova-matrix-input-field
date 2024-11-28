@@ -34,6 +34,19 @@ class MatrixInputField extends Field
         return $this->withMeta(['delimiter' => $delimiter]);
     }
 
+
+    /**
+     * Set table styles
+     *
+     * @param array $styles
+     * @return self
+     */
+    public function setTableStyles(array $styles = []): self
+    {
+        return $this->withMeta(['tableStyles' => $styles]);
+    }
+
+
     /**
      * Set matrix cells
      *
